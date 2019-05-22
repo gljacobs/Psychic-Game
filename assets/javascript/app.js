@@ -15,25 +15,36 @@ document.onkeyup = function(event) {
     guess = event.key;
     console.log(letter);
     
-    if(guessesLeft >= 1) {
+    if(guessesLeft >= 1 && !guesses.includes(guess)) {
         guesses.push(guess);
         if(guess === letter) {
             wins++;
-            guessesLeft = 10;
             document.getElementById("games-won").textContent = "Wins: " + wins;
+            
+            guessesLeft = 9;
             document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
+            
             letter = alphabet[Math.floor(alphabet.length * Math.random())];
+            
+            guesses = [];
+            document.getElementById("guesses").textContent = "Your Guesses so far: ";
         }
-    }
-    else {
-        losses++;
-        guessesLeft = 10;
-        document.getElementById("games-lost").textContent = "Losses: " + losses;
+
+        guessesLeft--;
         document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
-        letter = alphabet[Math.floor(alphabet.length * Math.random())];
+        document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
     }
-    guessesLeft--;
-    document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
-    document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
+    else if (guessesLeft < 1){
+        losses++;
+        document.getElementById("games-lost").textContent = "Losses: " + losses;
+       
+        guessesLeft = 9;
+        document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
+
+        letter = alphabet[Math.floor(alphabet.length * Math.random())];
+
+        guesses = [];
+        document.getElementById("guesses").textContent = "Your Guesses so far: ";
+    }
 }
 
