@@ -15,19 +15,25 @@ document.onkeyup = function(event) {
     guess = event.key;
     console.log(letter);
     
-    if(guessesLeft > 0) {
+    if(guessesLeft >= 1) {
         guesses.push(guess);
-        document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
         if(guess === letter) {
             wins++;
+            guessesLeft = 10;
             document.getElementById("games-won").textContent = "Wins: " + wins;
+            document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
+            letter = alphabet[Math.floor(alphabet.length * Math.random())];
         }
     }
     else {
         losses++;
+        guessesLeft = 10;
         document.getElementById("games-lost").textContent = "Losses: " + losses;
+        document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
+        letter = alphabet[Math.floor(alphabet.length * Math.random())];
     }
     guessesLeft--;
     document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
+    document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
 }
 
