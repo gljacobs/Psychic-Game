@@ -16,6 +16,7 @@ document.onkeyup = function(event) {
     console.log(letter);
     
     if(guessesLeft >= 1 && !guesses.includes(guess)) {
+        guessesLeft--;
         guesses.push(guess);
         if(guess === letter) {
             wins++;
@@ -29,12 +30,12 @@ document.onkeyup = function(event) {
             guesses = [];
             document.getElementById("guesses").textContent = "Your Guesses so far: ";
         }
-
-        guessesLeft--;
-        document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
-        document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
+        else{
+            document.getElementById("guesses-left").textContent = "Guesses Left: " + guessesLeft;
+            document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
+        }
     }
-    else if (guessesLeft < 1){
+    else if (guessesLeft === 0){
         losses++;
         document.getElementById("games-lost").textContent = "Losses: " + losses;
        
