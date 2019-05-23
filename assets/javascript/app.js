@@ -35,7 +35,7 @@ document.onkeyup = function(event) {
                 document.getElementById("guesses").textContent = document.getElementById("guesses").textContent + " " + guess;
             }
         }
-        else (guessesLeft === 0){
+        if (guessesLeft === 0){
             losses++;
             document.getElementById("games-lost").textContent = "Losses: " + losses;
         
